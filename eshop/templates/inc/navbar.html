@@ -1,0 +1,20 @@
+
+{%load static%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container-fluid">
+        <div class="navbar-nav ">
+            <a class="nav-link active" href="{% url 'home:home' %}">صفحه اصلی</a>
+            {% if request.user.is_authenticated %}
+            <a class="nav-link active" href="{% url 'accounts:user_logout' %}">خروج</a>
+            {% else %}
+            <a class="nav-link active" href="{% url 'accounts:user_register' %}">عضویت</a>
+            <a class="nav-link active" href="{% url 'accounts:user_login' %}">ورود</a>
+            {% endif %}
+            {%  if request.user.is_admin %}
+             <a class="nav-link active" href="{% url 'home:bucket' %}">صندوق</a>
+            {% endif %}
+             <a class="nav-link active" href="{% url 'orders:cart' %}">{{ cart|length}}سبد خرید</a>
+                <h3 style="margin-left: 302px;"> به فروشگاه آنلاین نت نو خوش آمدید</h3>
+        </div>
+    </div>
+</nav>

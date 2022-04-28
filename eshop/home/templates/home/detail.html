@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block content %}
+  <h2>{{product.name}}</h2>
+  <small>{{product.created}}</small><br>
+  <p>{{product.price}} تومان</p>
+  <img src="{{product.image.url}}" style="width: 300px">
+  <p>{{product.description|safe}}</p><br><br>
+  <!--دسترسی اضافه کردن به سبد خرید برای کسایی که از ادپرمیشن استفاده نمیکنن و دسترسی محمدود دارند غیرفعال بشه از  if perms.home.add_order  بین دوتا تگ فرم استفاده میکنیم-->
+
+      <form action="{% url 'orders:cart_add' product.id %}" method="post">
+          {% csrf_token %}
+          {{form}}
+          <input type="submit" value="اضافه کردن به سبد خرید">
+      </form>
+
+{% endblock %}
+
+
